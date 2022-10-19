@@ -2,6 +2,15 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require ("console.table");
 
+const db = mysql.createConnection(
+    {
+        host:"localhost",
+        user:"root",
+        password:"02171993",
+        database:"company_info"
+    },
+);
+
 const viewAllOptions = () => {
     return inquirer.prompt([
     {
@@ -14,5 +23,6 @@ const viewAllOptions = () => {
     }   
 
     ])
+    .then 
 }
 viewAllOptions();
