@@ -24,7 +24,25 @@ const viewAllOptions = () => {
     }   
 
     ])
-    .then 
+    .then ((answers) => {
+        if (answers.option === "View all departments"){
+            viewDepartments();
+        }else if(answers.option === "View all roles"){
+            viewRoles();
+        }else if(answers.option === "View all employees"){
+            viewEmployees();
+        }else if(answers.option === "Add a department"){
+            addDepartment();
+        }else if(answers.option === "Add a role"){
+            addRole();
+        }else if(answers.option === "Add an employee"){
+            addEmployee();
+        }else if(answers.option === "Update an employee role"){
+            updateRole();
+        }else(answers.option === "I'm done"){
+            endPrompt();
+        }
+    })
 }
 viewAllOptions();
 
