@@ -159,4 +159,6 @@ const updateRole = () => {
     })
 };
 
-endPrompt();
+const endPrompt = () => {
+    console.log("Your databse has been successfully updated.")
+};
