@@ -57,14 +57,22 @@ const viewDepartments = () => {
 
    });
 };
-const viewRoles =() => {
+const viewRoles = () => {
     const mysql = `SELECT * FROM department_role`;
 
     connection.query(mysql, (err, rows) => {
         console.table(rows);
-    })
+    });
 };
-viewEmployees();
+
+const viewEmployees = () => {
+    const mysql = `SELECT * FROM employee`;
+
+    connection.query(mysql, (err, rows) => {
+        console.table(rows);
+    });
+
+};
 addDepartment();
 addRole();
 addEmployee();
