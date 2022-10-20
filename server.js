@@ -111,6 +111,33 @@ const addRole = () => {
         const mysql = `INSERT INTO department_role`
     })
 };
-addEmployee();
+
+const addEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "first",
+            message: "Enter the new employee's first name."
+        },
+        {
+            type: "input",
+            name: "last",
+            message: "Enter the new employee's last name."
+        },
+        {
+            type: "input",
+            name: "role",
+            message: "Enter the new employee's role."
+        },
+        {
+            type: "input",
+            name: "manager",
+            message: "Enter the new employee's manager."
+        }
+    ])
+    .then (answer => {
+        const mysql = `INSERT INTO employee`
+    })
+};
 updateRole();
 endPrompt();
