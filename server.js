@@ -139,5 +139,24 @@ const addEmployee = () => {
         const mysql = `INSERT INTO employee`
     })
 };
-updateRole();
+
+const updateRole = () => {
+    return inquirer.prompt([
+        {
+            type: "rawlist",
+            name:"update",
+            message: "Choose an employee to update.",
+            choices: ["Leah Choco", "Juan Choco", "Solomon Hosea,"]
+        },
+        {
+            type: "input",
+            name:"updateRole",
+            message: "Enter the updated role for the chosen employee."
+        }
+    ])
+    .then(answers => {
+        const mysql = `INSERT INTO employee`
+    })
+};
+
 endPrompt();
