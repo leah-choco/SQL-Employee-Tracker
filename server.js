@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require ("console.table");
 const { default: ExpandPrompt } = require("inquirer/lib/prompts/expand");
+const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const db = mysql.createConnection(
     {
@@ -47,8 +48,18 @@ const viewAllOptions = () => {
 viewAllOptions();
 
 //Functions I need to create:
-viewDepartments();
-viewRoles();
+const viewDepartments = () => {
+   const mysql= `SELECT * FROM department`;
+
+   connection.query(mysql, (err,rows) =>{
+    if (err) return console.log(err);
+    console.table(rows);
+
+   });
+};
+const viewRoles =() =>{
+
+};
 viewEmployees();
 addDepartment();
 addRole();
