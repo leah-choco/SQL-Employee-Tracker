@@ -73,7 +73,21 @@ const viewEmployees = () => {
     });
 
 };
-addDepartment();
+
+const addDepartment = () => {
+    return inquirer.prompt ([
+        {
+            type: "input",
+            name: "add",
+            message: "Enter the name of the department you want to add"
+        },
+    ])
+    .then(answer => {
+        const mysql = `INSERT INTO department`
+    })
+
+    
+};
 addRole();
 addEmployee();
 updateRole();
