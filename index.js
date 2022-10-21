@@ -9,15 +9,15 @@ const db = mysql.createConnection(
         host:"localhost",
         user:"root",
         password:"02171993",
-        database:"company_info"
+        database:"company_db"
     },
 );
 
 const viewAllOptions = () => {
     return inquirer.prompt([
     {
-        type: 'rawlist',
-        name: 'options',
+        type: 'list',
+        name: 'option',
         message: 'Choose from the following options to start the process to update the database.',
         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "I'm done"]
 
@@ -40,7 +40,7 @@ const viewAllOptions = () => {
             addEmployee();
         }else if(answers.option === "Update an employee role"){
             updateRole();
-        }else(answers.option === "I'm done"){
+        }else if(answers.option === "I'm done"){
             endPrompt();
         }
     })
@@ -49,27 +49,28 @@ viewAllOptions();
 
 //Functions I need to create:
 const viewDepartments = () => {
-   const mysql= `SELECT * FROM department`;
+    db.query(`SELECT * FROM department`, function (err, res){
+        if(err) throw err;
+        console.table(res);
+        viewAllOptions();
+    });
 
-   connection.query(mysql, (err,rows) =>{
-    if (err) return console.log(err);
-    console.table(rows);
-
-   });
+  
 };
 const viewRoles = () => {
-    const mysql = `SELECT * FROM department_role`;
-
-    connection.query(mysql, (err, rows) => {
-        console.table(rows);
+    db.query(`SELECT * FROM roles`, function (err, res){
+        if(err) throw err;
+        console.table(res);
+        viewAllOptions();
     });
+    
 };
 
 const viewEmployees = () => {
-    const mysql = `SELECT * FROM employee`;
-
-    connection.query(mysql, (err, rows) => {
-        console.table(rows);
+    db.query(`SELECT * FROM employee`, function (err, res){
+        if(err) throw err;
+        console.table(res);
+        viewAllOptions();
     });
 
 };
