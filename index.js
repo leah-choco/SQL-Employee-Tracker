@@ -1,8 +1,8 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require ("console.table");
-const { default: ExpandPrompt } = require("inquirer/lib/prompts/expand");
-const Connection = require("mysql2/typings/mysql/lib/Connection");
+//const { default: ExpandPrompt } = require("inquirer/lib/prompts/expand");
+//const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 const db = mysql.createConnection(
     {
@@ -155,7 +155,7 @@ const updateRole = () => {
         }
     ])
     .then(answers => {
-        const mysql = `INSERT INTO employee`
+        const mysql = `UPDATE INTO employee SET "" WHERE ...`
     })
 };
 
