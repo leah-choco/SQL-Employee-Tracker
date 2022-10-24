@@ -1,4 +1,3 @@
---This is the dummy data to "seed" the tables in the database.
 INSERT INTO department(names)
 VALUES  
     ("Engineering"),
