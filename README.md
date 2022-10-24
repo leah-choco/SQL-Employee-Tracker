@@ -1,6 +1,8 @@
 # SQL-Employee-Tracker
 
 Demonstration:
+[Untitled_ Oct 24, 2022 2_06 PM.webm](https://user-images.githubusercontent.com/109236891/197606409-a7e97df5-e59f-4fab-837b-7a061897452a.webm)
+
 
 ## User Story:
 
