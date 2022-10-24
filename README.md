@@ -57,7 +57,7 @@ You will need 3 npm packages; inquirer(version8.2.4), mysql2, and console.table(
 
 The main thing I learned was how to write SQL query statements. The most complicated one was in the function viewEmployees. This required me to figure out how to combine different tables and make them viewer friendly. 
 
-The other smaller thing was learning how to comment in sql files. I chose to use -- as my comments were not long. 
+I believe moving forward, I see the value in OVM and using Sequelize to avoid some of te very long query statements. 
 
 
 
