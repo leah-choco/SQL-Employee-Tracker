@@ -1,3 +1,4 @@
+--This is the dummy data to "seed" the tables in the database.
 INSERT INTO department(names)
 VALUES  
     ("Engineering"),
@@ -13,7 +14,6 @@ VALUES
     ("CFO", 200000, 003),
     ("Lawyer", 50000, 004);
     
-
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES 

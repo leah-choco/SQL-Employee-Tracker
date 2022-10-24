@@ -1,7 +1,9 @@
+//Importing npm packages.
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require("console.table");
 
+//Connecting to the mysql database.
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -9,6 +11,7 @@ const db = mysql.createConnection({
   database: "company_db",
 });
 
+//The first function opens the prompts and provides options for the user.
 const viewAllOptions = () => {
   return inquirer
     .prompt([
@@ -51,7 +54,7 @@ const viewAllOptions = () => {
 };
 viewAllOptions();
 
-
+//This allows the user to see the departments already in the database.
 const viewDepartments = () => {
   db.query(`SELECT * FROM department`, function (err, res) {
     if (err) throw err;
@@ -59,6 +62,8 @@ const viewDepartments = () => {
     viewAllOptions();
   });
 };
+
+//This allows the user to see the roles that are already in the database. The query statement allows it to be more user friendly.
 const viewRoles = () => {
   const mysql = `SELECT roles.id, roles.title, department.names AS department FROM roles LEFT JOIN department ON roles.department_id = department.id`;
   db.query(mysql, (err, res) => {
@@ -68,6 +73,7 @@ const viewRoles = () => {
   });
 };
 
+//This allows the user to see all the employees in the database. The query statement lets the user see everything in one table without the id numbers.
 const viewEmployees = () => {
   const mysql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.names AS department, roles.salary, CONCAT(mgr.first_name, mgr.last_name) AS manager FROM employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id LEFT JOIN employee mgr ON employee.manager_id = mgr.id`
   db.query(mysql, (err, res) => {
@@ -77,6 +83,7 @@ const viewEmployees = () => {
   });
 };
 
+//This allows the user to add a department to the database.
 const addDepartment = () => {
   return inquirer
     .prompt([
@@ -98,6 +105,7 @@ const addDepartment = () => {
     });
 };
 
+//This allows the user to add a role to the database.
 const addRole = () => {
   return inquirer
     .prompt([
@@ -129,6 +137,7 @@ const addRole = () => {
     });
 };
 
+//This allows the user to add an employee to the database.
 const addEmployee = () => {
   return inquirer
     .prompt([
@@ -165,6 +174,8 @@ const addEmployee = () => {
     });
 };
 
+//This allows the user to change employee information in the database and update it.
+//I also added a format so that I can use the ids on the back end, but the console shows the user exactly what we did in an easier format to read.
 const updateEmployeeRole = () => {
   db.query(`SELECT * FROM employee`, (err, res) => {
     if (err) throw err;
@@ -173,7 +184,6 @@ const updateEmployeeRole = () => {
       value: employee.id
     }));
    
-
     db.query(`SELECT * FROM roles`, (err, res) => {
         if (err) throw err;
         const roleArray = res.map((role) => ({
@@ -181,7 +191,6 @@ const updateEmployeeRole = () => {
           value: role.id
         }));
        
-
         return inquirer
     .prompt([
       {
@@ -211,6 +220,7 @@ const updateEmployeeRole = () => {
   
 };
 
+//This is the log that shows when the user chooses to be done.
 const endPrompt = () => {
   console.log("Your databse has been successfully updated.");
 };
