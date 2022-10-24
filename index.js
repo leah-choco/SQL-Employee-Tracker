@@ -60,7 +60,8 @@ const viewDepartments = () => {
   });
 };
 const viewRoles = () => {
-  db.query(`SELECT * FROM roles`, function (err, res) {
+  const mysql = `SELECT roles.id, roles.title, department.names AS department FROM roles LEFT JOIN department ON roles.department_id = department.id`;
+  db.query(mysql, (err, res) => {
     if (err) throw err;
     console.table(res);
     viewAllOptions();
@@ -68,7 +69,8 @@ const viewRoles = () => {
 };
 
 const viewEmployees = () => {
-  db.query(`SELECT * FROM employee`, function (err, res) {
+  const mysql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.names AS department, roles.salary, CONCAT(mgr.first_name, mgr.last_name) AS manager FROM employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id LEFT JOIN employee mgr ON employee.manager_id = mgr.id`
+  db.query(mysql, (err, res) => {
     if (err) throw err;
     console.table(res);
     viewAllOptions();
@@ -101,22 +103,22 @@ const addRole = () => {
     .prompt([
       {
         type: "input",
-        name: "roleName",
+        name: "title",
         message: "Enter the name of the role you want to add.",
       },
       {
         type: "input",
-        name: "roleSalary",
+        name: "salary",
         message: "Enter the salary you want for the new role.",
       },
       {
         type: "input",
-        name: "roleDepartment",
+        name: "department_id",
         message: "Enter the department for this new role.",
       },
     ])
     .then((answer) => {
-      const mysql = `INSERT INTO department_role SET ?`;
+      const mysql = `INSERT INTO roles SET ?`;
       db.query(mysql, answer, (err, res) => {
         if (err) throw err;
         console.log(
@@ -132,22 +134,22 @@ const addEmployee = () => {
     .prompt([
       {
         type: "input",
-        name: "first",
+        name: "first_name",
         message: "Enter the new employee's first name.",
       },
       {
         type: "input",
-        name: "last",
+        name: "last_name",
         message: "Enter the new employee's last name.",
       },
       {
         type: "input",
-        name: "role",
+        name: "role_id",
         message: "Enter the new employee's role.",
       },
       {
         type: "input",
-        name: "manager",
+        name: "manager_id",
         message: "Enter the new employee's manager.",
       },
     ])
