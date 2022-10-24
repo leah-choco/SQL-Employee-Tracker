@@ -43,7 +43,7 @@ const viewAllOptions = () => {
       } else if (answers.option === "Add an employee") {
         addEmployee();
       } else if (answers.option === "Update an employee role") {
-        updateRole();
+        updateEmployeeRole();
       } else if (answers.option === "I'm done") {
         endPrompt();
       }
@@ -51,7 +51,7 @@ const viewAllOptions = () => {
 };
 viewAllOptions();
 
-//Functions I need to create:
+
 const viewDepartments = () => {
   db.query(`SELECT * FROM department`, function (err, res) {
     if (err) throw err;
@@ -115,8 +115,15 @@ const addRole = () => {
         message: "Enter the department for this new role.",
       },
     ])
-    .then((answers) => {
-      const mysql = `INSERT INTO department_role`;
+    .then((answer) => {
+      const mysql = `INSERT INTO department_role SET ?`;
+      db.query(mysql, answer, (err, res) => {
+        if (err) throw err;
+        console.log(
+          `${res.affectedRows} role was inserted into the database. \n`
+        );
+        viewAllOptions();
+      });
     });
 };
 
@@ -145,11 +152,18 @@ const addEmployee = () => {
       },
     ])
     .then((answer) => {
-      const mysql = `INSERT INTO employee`;
+      const mysql = `INSERT INTO employee SET ?`;
+      db.query(mysql, answer, (err, res) => {
+        if (err) throw err;
+        console.log(
+          `${res.affectedRows} employee was inserted into the database. \n`
+        );
+        viewAllOptions();
+        });
     });
 };
 
-const updateRole = () => {
+const updateEmployeeRole = () => {
   db.query(`SELECT * FROM employee`, (err, res) => {
     if (err) throw err;
     const employeeArray = res.map((employee) => ({
